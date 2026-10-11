@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KRENO | Fewer empty slots. More care delivered.</title>
+<link rel="icon" href="logo.jpg" type="image/jpeg">
+<link rel="apple-touch-icon" href="logo.jpg">
+<meta name="description" content="KRENO helps independent medical practices predict no-shows, understand why patients miss visits, and refill open slots through a shared local network.">
+<link rel="icon" type="image/png" href="logo.png">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--navy:#1C0E8C;--violet:#6F60B8;--lime:#B9CF5B;--orange:#E8653D;--purple:#5A1E8C;--bg:#EDEAE6;--paper:#FBFAF8;--line:#D9D3EA;--tint:#F1EEFA;--tint2:#E3DDF5;--body:#3B3390}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--body);background:var(--bg)}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+h1,h2,h3{color:var(--navy);letter-spacing:-.02em;line-height:1.1}
+h1{font-size:clamp(38px,5.4vw,64px);font-weight:800;letter-spacing:-.035em}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}
+h3{font-size:19px;font-weight:750;letter-spacing:-.01em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--violet);margin-bottom:14px}
+.lead{font-size:19px;max-width:620px;margin-top:20px}
+.section{padding:92px 0}
+.section.white{background:var(--paper)}
+.section-head{max-width:760px;margin-bottom:48px}
+.section-head p{margin-top:16px;font-size:18px}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid var(--navy);cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn svg{width:18px;height:18px}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:4px 4px 0 var(--lime)}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn.ghost:hover{background:var(--tint2)}
+.btn.lime{background:var(--lime);border-color:var(--lime);color:var(--navy)}
+.btn.lime:hover{transform:translateY(-2px);box-shadow:4px 4px 0 var(--orange)}
+.btn.outline-light{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+.btn.outline-light:hover{background:rgba(255,255,255,.1)}
+.btn.sm{padding:9px 16px;font-size:14px;border-radius:10px}
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+.top{position:sticky;top:0;z-index:30;background:rgba(237,234,230,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:800;font-size:20px;letter-spacing:1px}
+.logo img{width:76px;height:76px;object-fit:contain}
+.links{display:flex;align-items:center;gap:26px;font-size:15px;font-weight:600}
+.links a{text-decoration:none;color:var(--navy)}
+.links a:not(.btn):hover{color:var(--violet)}
+.menu{display:none;background:transparent;border:2px solid var(--navy);border-radius:10px;padding:8px 12px;font-weight:700;color:var(--navy);cursor:pointer}
+
+.hero{padding:76px 0 100px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--tint2);color:var(--navy);font-weight:700;font-size:13px;padding:7px 14px;border-radius:99px;margin-bottom:22px}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.tagline{margin-top:22px;font-size:15px;font-weight:800;letter-spacing:.5px;color:var(--violet)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.fine{margin-top:16px;font-size:13px;color:var(--violet)}
+
+.mock{position:relative;background:var(--paper);border:2px solid var(--navy);border-radius:22px;padding:22px;box-shadow:10px 10px 0 var(--navy)}
+.mock-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;color:var(--navy)}
+.legend{display:flex;gap:14px;font-size:12px;font-weight:700}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.d{width:10px;height:10px;border-radius:50%;display:inline-block}
+.low{background:var(--lime)}.mod{background:var(--navy)}.high{background:var(--orange)}
+.cols,.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cols{margin-bottom:8px;font-size:11px;font-weight:800;letter-spacing:1.4px;color:var(--navy);text-align:center}
+.tile{border-radius:12px;padding:12px;min-height:76px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.tile b{font-size:14px;line-height:1.2}
+.tile span{font-size:12px;opacity:.85}
+.tile.low{color:var(--navy)}.tile.mod,.tile.high{color:#fff}
+.tile .ico{width:18px;height:18px;margin-bottom:2px}
+.float{position:absolute;left:-30px;bottom:-28px;max-width:300px;background:#fff;border:2px solid var(--navy);border-radius:14px;padding:14px 16px;box-shadow:6px 6px 0 var(--orange);font-size:13px;color:var(--navy);line-height:1.45}
+.float b{display:block;margin-bottom:2px}
+
+.stats{background:var(--navy);color:#fff;padding:54px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.stat b{display:block;font-size:clamp(40px,5vw,60px);font-weight:800;letter-spacing:-.03em;color:var(--lime);line-height:1}
+.stat span{display:block;margin-top:10px;color:#D5CFF2;font-size:15px}
+.footnote{margin-top:28px;font-size:12px;color:#B7AEE6;max-width:820px}
+
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;transition:transform .2s,box-shadow .2s}
+.white .card{background:var(--bg)}
+.card:hover{transform:translateY(-3px);box-shadow:6px 6px 0 var(--tint2)}
+.card p{margin-top:10px;font-size:15.5px}
+.badge-ico{width:48px;height:48px;border-radius:14px;background:var(--tint2);color:var(--navy);display:grid;place-items:center;margin-bottom:18px}
+.badge-ico.o{background:#FBDDD0;color:#B03F18}.badge-ico.l{background:#E7F0BF;color:#4B5E0F}
+
+.step{position:relative;padding-top:8px}
+.num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:grid;place-items:center;margin-bottom:18px}
+.step:nth-child(2) .num{background:var(--violet)}.step:nth-child(3) .num{background:var(--orange)}.step:nth-child(4) .num{background:var(--lime);color:var(--navy)}
+.step p{margin-top:10px;font-size:15.5px}
+
+.demo-band{background:var(--tint2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0}
+.demo-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.demo-inner p{margin-top:8px;max-width:640px}
+
+.dark{background:var(--navy);color:#D5CFF2}
+.dark h2,.dark h3{color:#fff}
+.dark .eyebrow{color:var(--lime)}
+.net{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:center;margin:8px 0 44px}
+.node{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:22px}
+.node small{display:block;font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--lime);margin-bottom:6px}
+.node b{color:#fff;font-size:17px;display:block}
+.node p{font-size:14px;margin-top:6px;color:#D5CFF2}
+.node.mid{background:var(--lime);border-color:var(--lime)}
+.node.mid small,.node.mid b,.node.mid p{color:var(--navy)}
+.arrow{color:var(--lime);width:28px;height:28px}
+.dark .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.dark .card p{color:#D5CFF2}
+.dark .card:hover{box-shadow:6px 6px 0 rgba(185,207,91,.5)}
+
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+.calc-in{background:var(--paper);border:2px solid var(--navy);border-radius:20px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;box-shadow:8px 8px 0 var(--navy)}
+.calc label{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--navy)}
+.calc input{font:inherit;font-size:17px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--navy);width:100%}
+.calc-out{background:var(--navy);border-radius:20px;padding:30px;color:#D5CFF2;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid rgba(255,255,255,.16);padding-bottom:14px;font-size:15px}
+.row b{color:#fff;font-size:20px}
+.row.big{border:0;padding:0;margin-top:4px}
+.row.big b{color:var(--lime);font-size:42px;letter-spacing:-.03em}
+.calc-note{margin-top:20px;font-size:13px;color:var(--violet)}
+
+.trust-item{display:flex;gap:16px;align-items:flex-start}
+.trust-item .badge-ico{margin:0;width:44px;height:44px;border-radius:12px}
+.trust-item p{margin-top:4px;font-size:15px}
+.notice{margin-top:34px;padding:18px 22px;border-left:4px solid var(--orange);background:var(--paper);border-radius:0 12px 12px 0;font-size:15px;color:var(--navy)}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--violet)}
+th.k{background:var(--navy);color:#fff}
+td.k{background:var(--tint);color:var(--navy);font-weight:600}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;color:var(--navy)}
+
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:8px}
+.road div{position:relative;padding:22px 22px 22px 26px;border:1px solid var(--line);background:var(--paper);margin-left:-1px}
+.road div:first-child{border-radius:16px 0 0 16px;background:var(--navy);color:#D5CFF2}
+.road div:first-child b{color:#fff}.road div:last-child{border-radius:0 16px 16px 0}
+.road small{display:block;font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+.road div:first-child small{color:var(--lime)}
+.road b{color:var(--navy);display:block;font-size:17px}
+.road p{font-size:14px;margin-top:6px}
+
+.cta{background:var(--navy);color:#D5CFF2;text-align:center;padding:96px 0}
+.cta h2{color:#fff;max-width:760px;margin:0 auto}
+.cta p{max-width:620px;margin:20px auto 0;font-size:18px}
+.cta .cta-row{justify-content:center}
+footer{background:#14096A;color:#B7AEE6;padding:40px 0;font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer .logo{color:#fff;font-size:18px}
+footer p{max-width:620px}
+footer a{color:#fff}
+
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}.btn,.card{transition:none}}
+
+@media(max-width:1000px){
+ .hero-grid,.calc{grid-template-columns:1fr}
+ .g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}
+ .net{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}
+ .road{grid-template-columns:1fr 1fr}.road div{border-radius:0!important}
+ .float{position:static;margin-top:20px;max-width:none}
+}
+@media(max-width:760px){
+ .section{padding:68px 0}
+ .menu{display:inline-block}
+ .links{display:none;position:absolute;top:72px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:16px}
+ .links.open{display:flex}
+ .g2,.g3,.g4,.stat-grid,.calc-in,.road{grid-template-columns:1fr}
+ .mock{box-shadow:6px 6px 0 var(--navy)}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-trend" viewBox="0 0 24 24"><path d="M2 13h5l3-9 4 16 3-8h5"/></symbol>
+ <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7 3H3c-1 10 8 19 18 18v-4l-5-2-2 2c-3-1-6-4-7-7l2-2z"/></symbol>
+ <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></symbol>
+ <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M2 21v-5c0-5 14-5 14 0v5m0-17c5-1 6 6 1 6m2 3c3 0 3 4 3 8"/></symbol>
+ <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18m-5 4h5v5h-5z"/></symbol>
+ <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 2v6M17 2v6M3 11h18"/></symbol>
+ <symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+ <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+ <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+ <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></symbol>
+ <symbol id="i-journal" viewBox="0 0 24 24"><rect x="5" y="3" width="15" height="19" rx="2"/><path d="M2 7h6M2 12h6M2 17h6m4-10h5m-5 5h5"/></symbol>
+ <symbol id="i-net" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="m8.6 10.6 6.8-3.2M8.6 13.4l6.8 3.2"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+</svg>
+
+<header class="top">
+ <div class="wrap nav">
+  <a class="logo" href="#top" aria-label="KRENO home"><img src="logo.png" alt="">KRENO</a>
+  <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
+  <nav class="links" id="links" aria-label="Main">
+   <a href="#problem">Problem</a>
+   <a href="#solution">Solution</a>
+   <a href="#platform">Platform</a>
+   <a href="#network">Network</a>
+   <a href="#roi">ROI</a>
+   <a href="#trust">Trust</a>
+   <a class="btn primary sm" href="NEWindex.html">Try the demo</a>
+  </nav>
+ </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <span class="pill"><i></i>Built for independent practices</span>
+   <h1>Fewer empty slots. More care delivered.</h1>
+   <p class="lead">KRENO predicts which appointments are at risk, finds out why patients miss visits, and refills open slots through a shared network of independent practices.</p>
+   <p class="tagline">PREDICT. UNDERSTAND. RESOLVE. FILL.</p>
+   <div class="cta-row">
+    <a class="btn primary" href="NEWindex.html">Try our live demo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a class="btn ghost" href="#solution">See how it works</a>
+   </div>
+   <p class="fine">No sign-up. The demo runs on simulated patients only.</p>
+  </div>
+  <div class="reveal">
+   <div class="mock" role="img" aria-label="Illustration of a KRENO schedule colored by no-show risk">
+    <div class="mock-top"><b>Tuesday schedule</b>
+     <div class="legend"><span><i class="d low"></i>Low</span><span><i class="d mod"></i>Moderate</span><span><i class="d high"></i>High</span></div>
+    </div>
+    <div class="cols"><span>MON</span><span>TUE</span><span>WED</span></div>
+    <div class="tiles">
+     <div class="tile low"><b>A. Lee</b><span>Follow-up</span></div>
+     <div class="tile low"><b>M. Diaz</b><span>Physio</span></div>
+     <div class="tile mod"><b>S. Khan</b><span>Therapy</span></div>
+     <div class="tile low"><b>L. Brown</b><span>Check-up</span></div>
+     <div class="tile high"><b>K. Brooks</b><span>Follow-up</span></div>
+     <div class="tile low"><svg class="ico" aria-hidden="true"><use href="#i-video"/></svg><b>Video visit</b><span>P. Silva</span></div>
+     <div class="tile mod"><b>C. Adams</b><span>Intake</span></div>
+     <div class="tile low"><b>N. Popov</b><span>Physio</span></div>
+     <div class="tile low"><b>D. Kim</b><span>Therapy</span></div>
+     <div class="tile low"><b>B. Cohen</b><span>Therapy</span></div>
+     <div class="tile low"><b>F. Rossi</b><span>Check-up</span></div>
+     <div class="tile high"><b>H. Ali</b><span>Follow-up</span></div>
+    </div>
+    <div class="float"><b>Slot refilled</b>2:00 PM released at Practice A and accepted by a waiting patient from Practice B.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="stats" aria-label="Why it matters">
+ <div class="wrap">
+  <div class="stat-grid">
+   <div class="stat"><b>10–30%</b><span>typical no-show range reported across outpatient care*</span></div>
+   <div class="stat"><b>~$200</b><span>commonly cited cost of one missed appointment*</span></div>
+   <div class="stat"><b>~14 : 1</b><span>illustrative return for a 20-visit-a-day practice**</span></div>
+  </div>
+  <p class="footnote">*Industry estimates, often published by software vendors. We are validating them with real practices. **Illustrative model based on our own assumptions; see the calculator below. Not a guarantee of results.</p>
+ </div>
+</section>
+
+<section class="section" id="problem">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">The problem</p>
+   <h2>A missed appointment is a lost slot, and the cost stays.</h2>
+   <p>Rent, staff and equipment are the same whether the patient arrives or not. Today's tools remind patients but rarely address why they miss visits.</p>
+  </div>
+  <div class="grid g3">
+   <div class="card reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-wallet"/></svg></div><h3>Fixed costs, lost revenue</h3><p>Each empty slot is revenue the practice cannot recover, while the fixed cost of running the clinic does not change.</p></div>
+   <div class="card reveal"><div class="badge-ico"><svg class="ico"><use href="#i-msg"/></svg></div><h3>Reminders don't ask why</h3><p>Transport, childcare, forgetting and cost are different problems. A text message solves only one of them.</p></div>
+   <div class="card reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-calendar"/></svg></div><h3>Freed slots stay empty</h3><p>A cancellation rarely gets refilled in time, because each practice only has its own waiting list.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section white" id="solution">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">The solution</p>
+   <h2>Predict. Understand. Resolve. Fill.</h2>
+   <p>One workflow, from the morning call list to the shared waitlist, built around the reasons patients miss care.</p>
+  </div>
+  <div class="grid g4">
+   <div class="step reveal"><div class="num">1</div><h3>Predict</h3><p>Every appointment gets a no-show risk score with the factors behind it: history, booking lead time, weather and holidays.</p></div>
+   <div class="step reveal"><div class="num">2</div><h3>Understand</h3><p>A ranked morning call list shows the likely reason for each at-risk visit, with a call script for the front desk.</p></div>
+   <div class="step reveal"><div class="num">3</div><h3>Resolve</h3><p>Offer a ride, childcare options, a video visit or a new time, instead of a flat cancellation.</p></div>
+   <div class="step reveal"><div class="num">4</div><h3>Fill</h3><p>A released slot is offered to consented waiting patients across nearby practices.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="demo-band">
+ <div class="wrap demo-inner">
+  <div>
+   <h3>See it working in two minutes</h3>
+   <p>An interactive demo with a 15-day schedule. Explore the call list, patient alternatives, the shared waitlist and recovered revenue. No sign-up, simulated data only.</p>
+  </div>
+  <a class="btn primary" href="NEWindex.html">Try our live demo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+ </div>
+</section>
+
+<section class="section" id="platform">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">The platform</p>
+   <h2>Six modules, one clear job: keep the schedule full.</h2>
+  </div>
+  <div class="grid g3">
+   <div class="card reveal"><div class="badge-ico"><svg class="ico"><use href="#i-trend"/></svg></div><h3>Risk score</h3><p>The probability that each patient will miss, with the factors that explain it: history, lead time, weather and holidays.</p></div>
+   <div class="card reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-phone"/></svg></div><h3>Morning call list</h3><p>At-risk appointments ranked, with the probable reason and a call script for the receptionist.</p></div>
+   <div class="card reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-video"/></svg></div><h3>Video switch</h3><p>Clinicians authorize video by visit type. Patients receive the option at the moment they would cancel.</p></div>
+   <div class="card reveal"><div class="badge-ico"><svg class="ico"><use href="#i-clip"/></svg></div><h3>Reason for absence</h3><p>A simple classification with one action per cause, for example offering a ride when transport is the barrier.</p></div>
+   <div class="card reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-users"/></svg></div><h3>Shared waitlist</h3><p>A slot released at Practice A is offered to a patient waiting at Practice B, with minimal data exchanged.</p></div>
+   <div class="card reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-wallet"/></svg></div><h3>Dashboard</h3><p>A schedule colored by risk, and the money recovered, shown in dollars.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section dark" id="network">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">The network</p>
+   <h2>Independent practices, connected for the first time.</h2>
+   <p>Large systems share capacity internally. Independent practices rarely do. KRENO links them through a shared waitlist, and every new practice makes the network more valuable for its neighbors.</p>
+  </div>
+  <div class="net reveal">
+   <div class="node"><small>Practice A</small><b>Slot released</b><p>A confirmed cancellation is published as a minimal entry.</p></div>
+   <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+   <div class="node mid"><small>Shared waitlist</small><b>Consented match</b><p>Patients who opted in are matched by visit type and availability.</p></div>
+   <svg class="ico arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+   <div class="node"><small>Practice B</small><b>Patient seen sooner</b><p>The patient accepts and gets care earlier. The slot is filled.</p></div>
+  </div>
+  <div class="grid g3">
+   <div class="card reveal"><h3>Privacy by design</h3><p>Other practices never see your schedule, patient names or risk scores. Only a minimal, consented matching entry is shared.</p></div>
+   <div class="card reveal"><h3>Start local</h3><p>One specialty in one neighborhood, such as behavioral health or physical therapy in Columbia, South Carolina. Two or three practices are enough to begin.</p></div>
+   <div class="card reveal"><h3>Better for patients</h3><p>A sooner appointment through the shared waitlist, or a ride, a video visit or a new time instead of a flat cancellation.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="roi">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">Return on investment</p>
+   <h2>Estimate what an empty slot costs your practice.</h2>
+   <p>Change the assumptions to match your clinic. The defaults reflect our reference case.</p>
+  </div>
+  <div class="calc reveal">
+   <div class="calc-in">
+    <label>Appointments per day (whole practice)<input id="c-appts" type="number" min="1" max="500" value="20"></label>
+    <label>No-show rate (%)<input id="c-rate" type="number" min="0" max="100" value="10"></label>
+    <label>Average value per visit ($)<input id="c-value" type="number" min="0" max="5000" value="200"></label>
+    <label>Working days per year<input id="c-days" type="number" min="1" max="365" value="220"></label>
+    <label>Lost slots recovered by KRENO (%)<input id="c-rec" type="number" min="0" max="100" value="30"></label>
+    <label>Practitioners<input id="c-prac" type="number" min="1" max="100" value="1"></label>
+   </div>
+   <div class="calc-out" aria-live="polite">
+    <div class="row"><span>Slots lost per day</span><b id="o-lost">2.0</b></div>
+    <div class="row"><span>Revenue lost per year</span><b id="o-year">$88,000</b></div>
+    <div class="row"><span>Recovered with KRENO</span><b id="o-rec">$26,400</b></div>
+    <div class="row"><span>KRENO subscription per year</span><b id="o-cost">$1,800</b></div>
+    <div class="row big"><span>Estimated return</span><b id="o-roi">14.7 : 1</b></div>
+   </div>
+  </div>
+  <p class="calc-note">Illustrative estimate. Assumes a $150 monthly subscription per practitioner and the recovery rate you enter. Real results depend on the practice and will be measured in pilots.</p>
+ </div>
+</section>
+
+<section class="section white">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">Why KRENO</p>
+   <h2>Reminders tell patients about the appointment. KRENO acts on the reason.</h2>
+  </div>
+  <div class="table-wrap reveal">
+   <table>
+    <thead><tr><th>Capability</th><th>Typical reminder tools</th><th class="k">KRENO</th></tr></thead>
+    <tbody>
+     <tr><td>Who is likely to miss</td><td>Everyone gets the same reminder</td><td class="k">A score per appointment, with the factors that explain it</td></tr>
+     <tr><td>Why they miss</td><td>Not captured</td><td class="k">Reason classified: transport, childcare, forgetting or cost</td></tr>
+     <tr><td>Action on the cause</td><td>Another reminder</td><td class="k">A ride, childcare option, video visit or a new time</td></tr>
+     <tr><td>Refilling the slot</td><td>Own waitlist only</td><td class="k">Offered to consented patients across nearby practices</td></tr>
+     <tr><td>Proof of value</td><td>Rarely reported in dollars</td><td class="k">Dashboard showing revenue recovered</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="who">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">Who it's for</p>
+   <h2>Designed for independent practices of 1 to 10 practitioners.</h2>
+   <p>Behavioral health, physical therapy and primary care see some of the highest no-show rates, and are often underserved by tools built for large groups.</p>
+  </div>
+  <div class="grid g3">
+   <div class="card reveal"><div class="badge-ico"><svg class="ico"><use href="#i-phone"/></svg></div><h3>Front desk</h3><p>A ranked morning call list with a reason and a script for each at-risk visit. Less time on the phone, more completed visits.</p></div>
+   <div class="card reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-video"/></svg></div><h3>Clinicians</h3><p>Decide which visit types can move to video, and keep every decision under your control.</p></div>
+   <div class="card reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-heart"/></svg></div><h3>Patients</h3><p>Clear options at the moment they would cancel: a ride, childcare help, a video visit or an earlier slot.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="section white" id="trust">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">Safeguards</p>
+   <h2>Built for care, with guardrails by design.</h2>
+  </div>
+  <div class="grid g3">
+   <div class="trust-item reveal"><div class="badge-ico"><svg class="ico"><use href="#i-ban"/></svg></div><div><h3>No automatic cancellations</h3><p>Releasing a slot always requires explicit confirmation by staff.</p></div></div>
+   <div class="trust-item reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-shield"/></svg></div><div><h3>Patient consent</h3><p>Outreach and network sharing only happen with the patient's consent.</p></div></div>
+   <div class="trust-item reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-lock"/></svg></div><div><h3>No visit reason in messages</h3><p>Messages never include the reason for the visit.</p></div></div>
+   <div class="trust-item reveal"><div class="badge-ico"><svg class="ico"><use href="#i-journal"/></svg></div><div><h3>Full activity log</h3><p>Every decision, score update and match is recorded.</p></div></div>
+   <div class="trust-item reveal"><div class="badge-ico o"><svg class="ico"><use href="#i-heart"/></svg></div><div><h3>No denial of care</h3><p>A risk score is never used to refuse or limit care.</p></div></div>
+   <div class="trust-item reveal"><div class="badge-ico l"><svg class="ico"><use href="#i-net"/></svg></div><div><h3>Minimal sharing</h3><p>Between practices, only a pseudonymous matching entry is exchanged.</p></div></div>
+  </div>
+  <p class="notice">KRENO is a scheduling and outreach tool, not a clinical decision system. The demo uses simulated data only. A full privacy and compliance program, including HIPAA, is part of our roadmap before any real patient data is processed.</p>
+ </div>
+</section>
+
+<section class="section">
+ <div class="wrap">
+  <div class="section-head reveal">
+   <p class="eyebrow">Where we're going</p>
+   <h2>Starting in healthcare. Built for every appointment-based business.</h2>
+   <p>If the score and the shared waitlist work in healthcare, beauty and wellness is a natural extension: the same pain, a lower price point, lighter constraints.</p>
+  </div>
+  <div class="road reveal">
+  <div><small>Years 1–5</small><b>Healthcare</b><p>Prove the model.</p></div>
+  <div><small>Year 6</small><b>Beauty salons</b><p>Reuse the score and shared waitlist.</p></div>
+  <div><small>Year 7</small><b>Slot marketplace</b><p>Last-minute offers between salons.</p></div>
+  <div><small>Year 7+</small><b>Other markets</b><p>Vets, coaching and more.</p></div>
+   </div>
+ </div>
+</section>
+
+<section class="cta" id="cta">
+ <div class="wrap">
+  <h2>Every empty slot is lost revenue. See how KRENO fills it.</h2>
+  <p>Try the interactive demo, or talk to us about a free 30 to 60 day pilot for your practice.</p>
+  <div class="cta-row">
+   <a class="btn lime" href="NEWindex.html">Try our live demo <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+   <a class="btn outline-light" href="mailto:hello@kreno.example?subject=KRENO%20pilot">Become a pilot practice</a>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ <div class="wrap foot">
+  <a class="logo" href="#top"><img src="logo.png" alt="">KRENO</a>
+  <p>&copy; <span id="yr">2026</span> KRENO. Demonstration project. All patients, prices and trends in the demo are simulated.</p>
+  <a href="NEWindex.html">Try the demo</a>
+ </div>
+</footer>
+
+<script>
+(function(){
+ var $=function(s){return document.querySelector(s)};
+ var menu=$('#menu'),links=$('#links');
+ menu.addEventListener('click',function(){var o=links.classList.toggle('open');menu.setAttribute('aria-expanded',o)});
+ links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');menu.setAttribute('aria-expanded',false)}});
+ $('#yr').textContent=new Date().getFullYear();
+
+ var fmt=function(n){return n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})};
+ var g=function(id,max){var v=parseFloat($('#'+id).value);return isNaN(v)?0:Math.min(Math.max(v,0),max)};
+ function calc(){
+  var appts=g('c-appts',500),rate=g('c-rate',100),val=g('c-value',5000),days=g('c-days',365),rec=g('c-rec',100),prac=Math.max(1,g('c-prac',100));
+  var lostDay=appts*rate/100,lostYear=lostDay*val*days,recovered=lostYear*rec/100,cost=prac*150*12;
+  $('#o-lost').textContent=lostDay.toFixed(1);
+  $('#o-year').textContent=fmt(lostYear);
+  $('#o-rec').textContent=fmt(recovered);
+  $('#o-cost').textContent=fmt(cost);
+  $('#o-roi').textContent=cost?(recovered/cost).toFixed(1)+' : 1':'–';
+ }
+ document.querySelectorAll('.calc input').forEach(function(i){i.addEventListener('input',calc)});
+ calc();
+
+ var items=document.querySelectorAll('.reveal');
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  items.forEach(function(el){io.observe(el)});
+ }else{items.forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</body>
+</html>
